@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CampusOS | Student Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <h2>Campus<span>OS</span></h2>
+    <p class="muted">YOUR STUDENT SPACE</p>
+    <nav>
+      <a class="active" href="#dashboard">▦ Dashboard</a>
+      <a href="#tasks">✓ My assignments</a>
+      <a href="#focus">◷ Focus mode</a>
+    </nav>
+    <p class="sidebar-note">Plan smarter. Stress less.</p>
+  </aside>
+
+  <main id="dashboard">
+    <header>
+      <div>
+        <p class="muted">YOUR PERSONAL CAMPUS HUB</p>
+        <h1>Let's get things done.</h1>
+        <p>Everything you need for a better study day.</p>
+      </div>
+      <div class="date" id="today"></div>
+    </header>
+
+    <section class="stats">
+      <article class="stat">
+        <p>Total assignments</p>
+        <h2 id="total">0</h2>
+      </article>
+      <article class="stat">
+        <p>Completed</p>
+        <h2 id="completed">0</h2>
+      </article>
+      <article class="stat">
+        <p>Still to do</p>
+        <h2 id="remaining">0</h2>
+      </article>
+    </section>
+
+    <section class="panel" id="tasks">
+      <div class="section-heading">
+        <div>
+          <h2>Assignment tracker</h2>
+          <p class="muted">One task at a time. You've got this.</p>
+        </div>
+      </div>
+
+      <form id="task-form">
+        <input id="task-title" type="text"
+          placeholder="What do you need to finish?"
+          maxlength="120" required>
+
+        <select id="task-subject" aria-label="Subject">
+          <option value="Programming">Programming</option>
+          <option value="Mathematics">Mathematics</option>
+          <option value="Physics">Physics</option>
+          <option value="Chemistry">Chemistry</option>
+          <option value="Other">Other</option>
+        </select>
+
+        <input id="task-deadline" type="date"
+          aria-label="Deadline" required>
+
+        <button type="submit">+ Add task</button>
+      </form>
+
+      <div class="filters">
+        <button class="filter active" data-filter="all">All</button>
+        <button class="filter" data-filter="pending">Pending</button>
+        <button class="filter" data-filter="completed">Completed</button>
+      </div>
+
+      <div id="task-list" aria-live="polite"></div>
+    </section>
+
+    <section class="panel focus-panel" id="focus">
+      <div>
+        <p class="muted">FOCUS MODE</p>
+        <h2>Make time for what matters.</h2>
+        <p>Start a 25-minute study session without distractions.</p>
+      </div>
+      <div class="timer" id="timer">25:00</div>
+      <div class="timer-controls">
+        <button id="timer-start">Start focus</button>
+        <button id="timer-reset" class="secondary">Reset</button>
+      </div>
+      <p id="timer-status" class="muted">Ready when you are.</p>
+    </section>
+
+    <footer>CampusOS · Built for students, by students.</footer>
+  </main>
+</body>
+</html>
