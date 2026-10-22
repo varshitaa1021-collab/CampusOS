@@ -1,0 +1,8 @@
+node_modules/
+backened/node_modules/
+backened/campusos.db
+backened/campusos.db-shm
+backened/campusos.db-wal
+.env
+.env.*
+!.env.example

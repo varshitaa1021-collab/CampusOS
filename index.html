@@ -9,93 +9,125 @@
   <script src="app.js" defer></script>
 </head>
 <body>
-  <aside class="sidebar">
-    <h2>Campus<span>OS</span></h2>
-    <p class="muted">YOUR STUDENT SPACE</p>
-    <nav>
-      <a class="active" href="#dashboard">▦ Dashboard</a>
-      <a href="#tasks">✓ My assignments</a>
-      <a href="#focus">◷ Focus mode</a>
-    </nav>
-    <p class="sidebar-note">Plan smarter. Stress less.</p>
-  </aside>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">YOUR STUDENT WORKSPACE</p>
+      <h1>CampusOS<span class="dot">.</span></h1>
+    </div>
+    <span class="status">● All systems ready</span>
+  </header>
 
-  <main id="dashboard">
-    <header>
-      <div>
-        <p class="muted">YOUR PERSONAL CAMPUS HUB</p>
-        <h1>Let's get things done.</h1>
-        <p>Everything you need for a better study day.</p>
-      </div>
-      <div class="date" id="today"></div>
-    </header>
+  <main class="container">
+    <section class="welcome">
+      <p class="eyebrow">YOUR DAY, ORGANIZED</p>
+      <h2>Make today count.</h2>
+      <p>One task at a time. You've got this.</p>
+    </section>
 
     <section class="stats">
-      <article class="stat">
-        <p>Total assignments</p>
-        <h2 id="total">0</h2>
+      <article class="stat-card">
+        <span>Total tasks</span>
+        <strong id="totalTasks">0</strong>
       </article>
-      <article class="stat">
-        <p>Completed</p>
-        <h2 id="completed">0</h2>
+      <article class="stat-card">
+        <span>Completed</span>
+        <strong id="completedTasks">0</strong>
       </article>
-      <article class="stat">
-        <p>Still to do</p>
-        <h2 id="remaining">0</h2>
+      <article class="stat-card">
+        <span>Remaining</span>
+        <strong id="remainingTasks">0</strong>
       </article>
     </section>
 
-    <section class="panel" id="tasks">
-      <div class="section-heading">
-        <div>
-          <h2>Assignment tracker</h2>
-          <p class="muted">One task at a time. You've got this.</p>
+    <div class="dashboard">
+      <section class="panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">STAY ON TRACK</p>
+            <h2>My tasks</h2>
+          </div>
+          <span id="taskCount" class="pill">0 tasks</span>
         </div>
-      </div>
 
-      <form id="task-form">
-        <input id="task-title" type="text"
-          placeholder="What do you need to finish?"
-          maxlength="120" required>
+        <form id="taskForm">
+          <label for="taskInput">Task name</label>
+          <input
+            id="taskInput"
+            type="text"
+            placeholder="e.g. Complete PPS assignment"
+            maxlength="120"
+            required
+          >
 
-        <select id="task-subject" aria-label="Subject">
-          <option value="Programming">Programming</option>
-          <option value="Mathematics">Mathematics</option>
-          <option value="Physics">Physics</option>
-          <option value="Chemistry">Chemistry</option>
-          <option value="Other">Other</option>
-        </select>
+          <div class="form-row">
+            <div>
+              <label for="taskDeadline">Deadline</label>
+              <input id="taskDeadline" type="date">
+            </div>
+            <div>
+              <label for="taskPriority">Priority</label>
+              <select id="taskPriority">
+                <option value="Low">Low</option>
+                <option value="Medium" selected>Medium</option>
+                <option value="High">High</option>
+              </select>
+            </div>
+          </div>
 
-        <input id="task-deadline" type="date"
-          aria-label="Deadline" required>
+          <button class="primary-button" type="submit">+ Add task</button>
+        </form>
 
-        <button type="submit">+ Add task</button>
-      </form>
+        <div class="task-toolbar">
+          <label for="taskFilter">Show</label>
+          <select id="taskFilter">
+            <option value="all">All tasks</option>
+            <option value="active">Remaining</option>
+            <option value="completed">Completed</option>
+          </select>
+        </div>
 
-      <div class="filters">
-        <button class="filter active" data-filter="all">All</button>
-        <button class="filter" data-filter="pending">Pending</button>
-        <button class="filter" data-filter="completed">Completed</button>
-      </div>
+        <div id="taskList" class="task-list"></div>
+        <p id="emptyMessage" class="empty-message">
+          No tasks here yet. Add your first one above.
+        </p>
+      </section>
 
-      <div id="task-list" aria-live="polite"></div>
-    </section>
+      <section class="panel focus-panel">
+        <p class="eyebrow">FOCUS MODE</p>
+        <h2>Time to concentrate.</h2>
+        <p class="muted">Work on one thing. Ignore the chaos.</p>
 
-    <section class="panel focus-panel" id="focus">
-      <div>
-        <p class="muted">FOCUS MODE</p>
-        <h2>Make time for what matters.</h2>
-        <p>Start a 25-minute study session without distractions.</p>
-      </div>
-      <div class="timer" id="timer">25:00</div>
-      <div class="timer-controls">
-        <button id="timer-start">Start focus</button>
-        <button id="timer-reset" class="secondary">Reset</button>
-      </div>
-      <p id="timer-status" class="muted">Ready when you are.</p>
-    </section>
+        <div class="timer" id="timerDisplay" role="timer"
+             aria-live="off">25:00</div>
 
-    <footer>CampusOS · Built for students, by students.</footer>
+        <div class="timer-controls">
+          <button id="startTimer" class="primary-button" type="button">
+            Start
+          </button>
+          <button id="resetTimer" class="secondary-button" type="button">
+            Reset
+          </button>
+        </div>
+
+        <p id="timerStatus" class="timer-status" aria-live="polite">
+          Ready for a 25-minute focus session.
+        </p>
+
+        <div class="tip">
+          <strong>Study tip</strong>
+          <p>Choose one task before starting your timer. Multitasking is mostly just task-switching wearing a fancy hat.</p>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <p>CampusOS · Built for better study days.</p>
+    </footer>
   </main>
+  <section id="backend-card">
+    <h2>CampusOS Backend</h2>
+    <p id="backend-status">Checking server connection...</p>
+    <button id="check-backend">Check Connection</button>
+</section>
 </body>
 </html>
